@@ -1,11 +1,11 @@
-import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import api from '../../utils/api';
-import { showErrorDialog } from '../../utils/tools';
+import { hideLoading, showLoading } from "react-redux-loading-bar";
+import api from "../../utils/api";
+import { showErrorDialog } from "../../utils/tools";
 const ActionType = {
-  GET_TODOS: 'GET_TODOS',
-  ADD_TODO: 'ADD_TODO',
-  DELETE_TODO: 'DELETE_TODO',
-  DETAIL_TODO: 'DETAIL_TODO',
+  GET_TODOS: "GET_TODOS",
+  ADD_TODO: "ADD_TODO",
+  DELETE_TODO: "DELETE_TODO",
+  DETAIL_TODO: "DETAIL_TODO",
 };
 function getTodosActionCreator(todos) {
   return {
@@ -41,7 +41,7 @@ function detailTodoActionCreator(todo) {
 }
 function asyncGetTodos(is_finished) {
   return async (dispatch) => {
-    dispatch(showLoading());
+    dispatch (showLoading());
     try {
       const todos = await api.getAllTodos(is_finished);
       dispatch(getTodosActionCreator(todos));
@@ -87,6 +87,21 @@ function asyncDetailTodo(id) {
     dispatch(hideLoading());
   };
 }
+
+function asyncUpdateTodo(id, { title, is_finished }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      await api.updateTodo(id, { title, is_finished });
+      // Jika Anda ingin melakukan sesuatu setelah update berhasil, Anda bisa dispatch action di sini.
+      dispatch(detailTodoActionCreator({ id, title, is_finished })); // Optionally, update detailTodo after update
+    } catch (error) {
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   getTodosActionCreator,
@@ -97,4 +112,5 @@ export {
   asyncDeleteTodo,
   detailTodoActionCreator,
   asyncDetailTodo,
+  asyncUpdateTodo,
 };
