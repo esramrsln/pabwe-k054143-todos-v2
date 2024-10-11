@@ -12,6 +12,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import TodoAddPage from "./pages/TodoAddPage";
 import TodoDetailPage from "./pages/TodoDetailPage";
+import UpdateTodoPage from "./pages/UpdateTodoPage";
+
 function App() {
   const { authLogin = null, isPreload = false } = useSelector(
     (states) => states
@@ -41,18 +43,18 @@ function App() {
               <h2>Forum App</h2>
             </div>
             <ul className="nav nav-pills mb-3">
-              <li className="nav-item w-50 text-center">
+              <li className="nav-item w-50 textcenter">
                 <Link
-                  className={`nav-link 
+                  className={`nav-link
 ${activeLogin} btl`}
                   to="/"
                 >
                   Login
                 </Link>
               </li>
-              <li className="nav-item w-50 text-center">
+              <li className="nav-item w-50 textcenter">
                 <Link
-                  className={`nav-link 
+                  className={`nav-link
 ${activeRegister} btl`}
                   to="/register"
                 >
@@ -83,6 +85,7 @@ ${activeRegister} btl`}
             <Route path="/users/me" element={<ProfilePage />} />
             <Route path="/todos/:id" element={<TodoDetailPage />} />
             <Route path="/todos/add" element={<TodoAddPage />} />
+            <Route path="/todos/:id/edit" element={<UpdateTodoPage />} />
           </Routes>
         </main>
       </div>

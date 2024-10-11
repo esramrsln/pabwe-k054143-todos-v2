@@ -17,7 +17,7 @@ function TodoItem({ todo, onDeleteTodo }) {
         <div className="row align-items-center">
           <div className="col-8 d-flex">
             <h5>
-              <Link to={`/todos/${todo.id}`} className="text-primary">
+              <Link to={/todos/${todo.id}} className="text-primary">
                 {todo.title}
               </Link>
             </h5>
@@ -32,14 +32,14 @@ function TodoItem({ todo, onDeleteTodo }) {
                 // eslint-disable-next-line no-undef
                 Swal.fire({
                   title: "Hapus Todo",
-                  text: `Apakah kamu yakin ingin mehapus todo: 
+                  text: `Apakah kamu yakin ingin mehapus todo:
 ${todo.title}?`,
                   icon: "warning",
                   showCancelButton: true,
                   confirmButtonText: "Ya, Tetap Hapus",
                   customClass: {
-                    confirmButton: "btn btn-danger me-3 mb-4",
-                    cancelButton: "btn btn-secondary mb-4",
+                    confirmButton: "btn btn-danger m-3 mb4",
+                    cancelButton: "btn btn-secondary mb-3 bm4",
                   },
                   buttonsStyling: false,
                 }).then((result) => {
